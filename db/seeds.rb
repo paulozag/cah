@@ -5,5 +5,5 @@ white_cards_string = "A Gypsy curse.<>A moment of silence.<>A sausage festival.<
 black_cards = black_cards_string.split('<>').map!{ |raw_card| raw_card.split('%^') }
 white_cards = white_cards_string.split('<>')
 
-black_cards.each { |card| MasterTopic.create(text: card[0], num_responses: card[1]) }
-white_cards.each { |card| MasterResponse.create(text: card) }
+black_cards.each { |card| MasterQuestion.create(text: card[0], needs_back: card[1]) }
+white_cards.each { |card| MasterAnswer.create(text: card) }
