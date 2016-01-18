@@ -37,34 +37,34 @@
     <type label="SET" length="1" sql="SET" quote=""/>
     <type label="Bit" length="0" sql="bit" quote=""/>
   </group>
-</datatypes><table x="588" y="25" name="Topic Cards">
+</datatypes><table x="588" y="25" name="Question Cards">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="player_id" null="1" autoincrement="0">
+<row name="winner_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Players" row="id" />
 </row>
-<row name="topic_deck_id" null="1" autoincrement="0">
+<row name="question_deck_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Topic Decks" row="id" />
+<default>NULL</default><relation table="Question Decks" row="id" />
 </row>
-<row name="topic_discard_pile_id" null="1" autoincrement="0">
+<row name="question_discard_pile_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Topic Discard Piles" row="id" />
+<default>NULL</default><relation table="Question Discard Piles" row="id" />
 </row>
 <row name="excluded?" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="master_topic_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Master Topics" row="id" />
+<default>NULL</default><relation table="Master Questions" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="590" y="329" name="Response Cards">
+<table x="590" y="329" name="Answer Cards">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Players" row="id" />
@@ -73,26 +73,26 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Players" row="id" />
 </row>
-<row name="response_deck_id" null="1" autoincrement="0">
+<row name="answer_deck_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Response Decks" row="id" />
+<default>NULL</default><relation table="Answer Deccks" row="id" />
 </row>
-<row name="response_discard_pile_id" null="1" autoincrement="0">
+<row name="answer_discard_pile_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Response Discard Piles" row="id" />
+<default>NULL</default><relation table="Answer Discard Piles" row="id" />
 </row>
 <row name="excluded?" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="master_response_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Master Responses" row="id" />
+<default>NULL</default><relation table="Master Answers" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="300" y="400" name="Players">
+<table x="296" y="299" name="Players">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -116,8 +116,11 @@
 <part>id</part>
 </key>
 </table>
-<table x="58" y="158" name="Rounds">
+<table x="49" y="159" name="Rounds">
 <row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="phase" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="game_id" null="1" autoincrement="0">
@@ -135,20 +138,17 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Players" row="id" />
 </row>
-<row name="topic_card_id" null="1" autoincrement="0">
+<row name="question_card_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="new field" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="new field" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="199" y="53" name="Topic Decks">
+<table x="199" y="53" name="Question Decks">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -160,7 +160,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="202" y="141" name="Response Decks">
+<table x="202" y="141" name="Answer Deccks">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -172,7 +172,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="921" y="161" name="Topic Discard Piles">
+<table x="921" y="161" name="Question Discard Piles">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -184,7 +184,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="954" y="270" name="Response Discard Piles">
+<table x="954" y="270" name="Answer Discard Piles">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -206,19 +206,25 @@
 <row name="password" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="1003" y="500" name="Master Responses">
-<row name="id" null="1" autoincrement="1">
+<row name="email" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="799" y="20" name="Master Topics">
+<table x="1003" y="500" name="Master Answers">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="text" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="961" y="28" name="Master Questions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
