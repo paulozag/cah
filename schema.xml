@@ -56,7 +56,7 @@
 <row name="excluded?" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="master_topic_id" null="1" autoincrement="0">
+<row name="master_question_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Master Questions" row="id" />
 </row>
@@ -84,7 +84,7 @@
 <row name="excluded?" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="master_response_id" null="1" autoincrement="0">
+<row name="master_answer_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Master Answers" row="id" />
 </row>
@@ -92,7 +92,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="296" y="299" name="Players">
+<table x="171" y="428" name="Players">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -116,7 +116,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="49" y="159" name="Rounds">
+<table x="20" y="148" name="Rounds">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -196,7 +196,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="54" y="402" name="Users">
+<table x="27" y="363" name="Users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -213,7 +213,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1003" y="500" name="Master Answers">
+<table x="1181" y="504" name="Master Answers">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -224,7 +224,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="961" y="28" name="Master Questions">
+<table x="1071" y="24" name="Master Questions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>

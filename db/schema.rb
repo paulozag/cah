@@ -11,10 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118013321) do
+ActiveRecord::Schema.define(version: 20160118200909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answer_cards", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "answer_deck_id"
+    t.integer  "answer_discard_pile_id"
+    t.boolean  "excluded",               default: false
+    t.integer  "master_answer_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  create_table "answer_decks", force: :cascade do |t|
+    t.integer  "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "answer_discard_piles", force: :cascade do |t|
+    t.integer  "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "winner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "master_answers", force: :cascade do |t|
     t.string   "text"
@@ -29,16 +57,31 @@ ActiveRecord::Schema.define(version: 20160118013321) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "master_topics", force: :cascade do |t|
-    t.text     "text"
-    t.integer  "num_responses"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
   create_table "players", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "question_cards", force: :cascade do |t|
+    t.integer  "winner_id"
+    t.integer  "question_deck_id"
+    t.integer  "question_discard_pile_id"
+    t.boolean  "excluded",                 default: false
+    t.integer  "master_question_id"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  create_table "question_decks", force: :cascade do |t|
+    t.integer  "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "question_discard_piles", force: :cascade do |t|
+    t.integer  "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MasterTopicTest < ActiveSupport::TestCase
+class QuestionDiscardPileTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
