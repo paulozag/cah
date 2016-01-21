@@ -7,6 +7,7 @@ class CreateRounds < ActiveRecord::Migration
       t.integer :judge_id
       t.integer :winner_id
       t.references :question_card
+      t.references :answer_card
       t.text :player_answers, hash: true, defalut: {}
 
       t.timestamps null: false
