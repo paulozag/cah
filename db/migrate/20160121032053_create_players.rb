@@ -1,6 +1,6 @@
-class CreateUserGames < ActiveRecord::Migration
+class CreatePlayers < ActiveRecord::Migration
   def change
-    create_table :user_games do |t|
+    create_table :players do |t|
       t.references :user
       t.references :game
 
