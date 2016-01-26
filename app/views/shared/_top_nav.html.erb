@@ -1,0 +1,9 @@
+<div>
+  <% if current_user  %>
+    hello <%= current_user.handle %>
+    <%= link_to 'sign out', destroy_user_session_path, method: 'delete'  %>
+  <% else %>
+    <p><%= link_to 'Sign in', new_user_session_path  %></p>
+    <p><%= link_to 'Sign up', new_user_registration_path  %></p>
+  <% end %>
+</div>
