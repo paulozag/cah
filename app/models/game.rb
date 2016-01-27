@@ -5,4 +5,11 @@ class Game < ActiveRecord::Base
   has_one :answer_deck
   has_one :answer_discard_pile
   has_one :question_discard_pile
+
+  after_save :intitialize_game_objects
+
+
+  private
+  def initialize_game_objects
+  end
 end

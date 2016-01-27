@@ -1,2 +1,6 @@
 <h1>Main landing page</h1>
 
+<% if current_user %>
+  <%= link_to 'create new game', new_game_path  %>
+<% end %>
+
