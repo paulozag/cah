@@ -11,5 +11,6 @@ class Game < ActiveRecord::Base
 
   private
   def initialize_game_objects
+
   end
 end

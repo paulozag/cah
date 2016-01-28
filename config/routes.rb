@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :games do
-    resources :players do
-      resources :rounds do
+  resources :games, only: [:new, :create] do
+    resources :player, only: [] do
+      resources :rounds, only: [] do
+        get 'game_launch'
       end
     end
   end
