@@ -8,8 +8,11 @@ Rails.application.routes.draw do
 
   resources :games, only: [:new, :create] do
     resources :player, only: [] do
-      resources :rounds, only: [] do
-        get 'game_launch'
+      resources :rounds, only: [:new] do
+        get 'draw_card'
+        get 'question_displayed'
+        get 'select_winner'
+        get 'summary'
       end
     end
   end

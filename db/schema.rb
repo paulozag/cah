@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20160121032053) do
 
   create_table "games", force: :cascade do |t|
     t.string   "status"
+    t.integer  "round_number", default: 1
     t.integer  "winner_id"
     t.string   "game_key"
     t.integer  "creator_id"
@@ -94,7 +95,7 @@ ActiveRecord::Schema.define(version: 20160121032053) do
   create_table "rounds", force: :cascade do |t|
     t.string   "phase",            default: "start"
     t.integer  "game_id"
-    t.integer  "round_number",     default: 1
+    t.integer  "round_number"
     t.integer  "judge_id"
     t.integer  "winner_id"
     t.integer  "question_card_id"

@@ -4,6 +4,7 @@ class CreateGames < ActiveRecord::Migration
       t.string :status
       t.integer :round_number, default: 1
       t.integer :winner_id
+      t.integer :judge_id
       t.string :game_key
       t.integer :creator_id
       t.text :player_array, array: true, default: []
