@@ -41,10 +41,9 @@ class RoundsController < ApplicationController
     #   status pending until all answers submitted
     #   render choose_winner
     #
-    #   render summary
     # if player
     # => status pending until winner is selected
-    # => render summary/summary
+    # => render summary
   end
 
   def summary
