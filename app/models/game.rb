@@ -9,8 +9,8 @@ class Game < ActiveRecord::Base
   after_save :intitialize_game_objects
 
 
-  private
-  def initialize_game_objects
+
+  def intitialize_game_objects
 
   end
 end

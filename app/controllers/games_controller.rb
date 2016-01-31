@@ -5,12 +5,14 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params, judge_id: current_user.id)
+    @game = Game.new(game_params)
+    @game.judge_id = current_user.id
+
     respond_to do |format|
       if @game.save
         @game.rounds.create(round_number: @game.round_number, judge_id: @game.judge_id)
-        @game.players.create(user_id: current_user.id)
-        format.html { redirect_to new_game_player_round_path() }
+        @player = @game.players.create(user_id: current_user.id)
+        format.html { redirect_to new_game_player_round_path(@game, @player) }
       else
         format.html {render 'new'}
       end

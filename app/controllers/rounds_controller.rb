@@ -2,6 +2,8 @@ class RoundsController < ApplicationController
   before_action :set_instance_variables_from_route, except: [:new]
 
   def new
+    @game = Game.find(params[:game_id])
+    @player = Player.find(params[:player_id])
 
     if judge?
       @round = @game.rounds.create(round_number: @game.round_number, judge_id: @game.judge_id)
@@ -71,5 +73,6 @@ class RoundsController < ApplicationController
 
   def judge?
     @player.user_id ==  @game.judge_id
+
   end
 end
