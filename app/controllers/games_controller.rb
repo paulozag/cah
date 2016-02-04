@@ -20,10 +20,15 @@ class GamesController < ApplicationController
   end
 
   def index
-    @games =
+    @user_id = params[:user_id]
+    if params[:game_id_selected]
+      redirect_to new_game_player_path(game_id: params[:game_id_selected], user_id: params[:user_id])
+    end
+    @games = Game.all.ready_for_players
   end
 
   def add_player
+
   end
 
   private
