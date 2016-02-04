@@ -8,6 +8,8 @@ class Game < ActiveRecord::Base
 
   after_save :intitialize_game_objects
 
+  scope :ready_for_players, -> { where(status: :loading)}
+
 
 
   def intitialize_game_objects

@@ -3,6 +3,7 @@ class CreatePlayers < ActiveRecord::Migration
     create_table :players do |t|
       t.references :user
       t.references :game
+      t.string :handle
       t.boolean :judge, default: false
 
       t.timestamps null: false

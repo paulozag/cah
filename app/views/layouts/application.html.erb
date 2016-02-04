@@ -10,7 +10,10 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= render 'shared/top_nav'  %>
-    <%= yield %>
+    <div id="main-content">
+      <%= yield %>
+    </div>
+
 
   </body>
 </html>

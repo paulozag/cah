@@ -7,6 +7,8 @@ class RoundsController < ApplicationController
 
     if judge?
       @round = @game.rounds.create(round_number: @game.round_number, judge_id: @game.judge_id)
+      @player.judge = true
+      @player.save
       render :waiting_for_players
     else
       # status pending until round is created

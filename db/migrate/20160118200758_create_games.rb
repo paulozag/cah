@@ -1,7 +1,7 @@
 class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
-      t.string :status
+      t.string :status, default: 'loading'
       t.integer :round_number, default: 1
       t.integer :winner_id
       t.integer :judge_id

@@ -19,6 +19,13 @@ class GamesController < ApplicationController
     end
   end
 
+  def index
+    @games =
+  end
+
+  def add_player
+  end
+
   private
   def game_params
     params.require(:game).permit(:game_key, :creator_id)

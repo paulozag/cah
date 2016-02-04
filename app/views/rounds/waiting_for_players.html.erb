@@ -1,0 +1,24 @@
+<h1>waiting for more players</h1>
+<!-- display list of players (list will update during polling) -->
+<!-- if player: start polling -->
+<!-- if judge: have a start game button disabled until 3 players or more -->
+
+<div class="box">
+  <h2>Members</h2>
+  <% @game.players.each do |player| %>
+    <p>
+      <span>
+        <%= player.handle  %>
+        <% if player.judge %>
+          &nbsp;&nbsp;&nbsp; -- Game Creator --
+        <% end %>
+      </span>
+
+    </p>
+  <% end %>
+</div>
+<br>
+<br>
+<% if @player.judge %>
+  <button>start game</button>
+<% end %>

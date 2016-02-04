@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :games, only: [:new, :create] do
+  resources :games, only: [:new, :create, :index] do
+    get :add_player
     resources :player, only: [] do
       resources :rounds, only: [:new] do
         get 'draw_card'
