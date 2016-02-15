@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :games, only: [:new, :create, :index] do
     get :add_player
+
     resources :players, only: [:new] do
       resources :rounds, only: [:new] do
         get 'draw_card'

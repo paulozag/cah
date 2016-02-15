@@ -9,3 +9,6 @@ black_cards.each { |card| MasterQuestion.create(text: card[0], needs_back: card[
 white_cards.each { |card| MasterAnswer.create(text: card) }
 
 paul= User.create(handle: 'paul', email: "p@p.com", password: 'paulpaul')
+fred = User.create(handle: 'fred', email: "f@f.com", password: 'fredfred')
+bert = User.create(handle: 'bert', email: "b@b.com", password: 'bertbert')
+nick = User.create(handle: 'nick', email: "n@n.com", password: 'nicknick')

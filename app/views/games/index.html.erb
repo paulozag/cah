@@ -13,7 +13,7 @@
     <h3>game creator: <span id="game-creator">none selected</span></h3>
     <label>game key:</label>
     <input type='text' name='game_key'><br>
-    <input type='submit'>
+    <input type='submit' disabled='true' id='join-game-submit'>
   </form>
 <% end %>
 
@@ -23,7 +23,8 @@
     console.log('hello from populateHiddenIDField')
     var creator = $('#game-number' + gameID).html();
     $('#game-creator').html(creator);
-    $('#hidden-game-id').val(gameID)
+    $('#hidden-game-id').val(gameID);
+    $('#join-game-submit').prop('disabled', false);
 
   };
 </script>

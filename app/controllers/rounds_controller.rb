@@ -11,7 +11,6 @@ class RoundsController < ApplicationController
       @player.save
       render :waiting_for_players
     else
-      # status pending until round is created
       render :waiting_for_players
     end
   end
