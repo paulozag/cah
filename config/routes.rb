@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :games, only: [:new, :create, :index] do
-    get :add_player
+    get :waiting_for_game_to_start
 
     resources :players, only: [:new] do
       resources :rounds, only: [:new] do

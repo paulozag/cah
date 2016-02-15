@@ -10,9 +10,9 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        @game.rounds.create(round_number: @game.round_number, judge_id: @game.judge_id)
+        @round = @game.rounds.create(round_number: @game.round_number, judge_id: @game.judge_id)
         @player = @game.players.create(user_id: current_user.id)
-        format.html { redirect_to new_game_player_round_path(@game, @player) }
+        format.html { redirect_to game_waiting_for_game_to_start_path(@game, player_id: @player.id, round_id: @round.id ) }
       else
         format.html {render 'new'}
       end
@@ -27,7 +27,10 @@ class GamesController < ApplicationController
     @games = Game.all.ready_for_players
   end
 
-  def add_player
+  def waiting_for_game_to_start
+    @game = Game.find(params[:game_id])
+    @player = Player.find(params[:player_id])
+    @round = Round.find(params[:round_id])
 
   end
 

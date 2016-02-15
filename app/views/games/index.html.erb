@@ -3,19 +3,20 @@
   <div >
     <p id="game-number<%= game.id %>" onclick="populateHiddenIDField(<%= game.id %>);"><%= User.find(game.creator_id).handle  %></p>
   </div>
+<% end %>
   <br><br>
 
-  <form>
-    <div style='display:none;'>
-      <input type='text' name='user_id' value='<%= @user_id  %>'>
-      <input type='text' name='game_id_selected' id='hidden-game-id'>
-    </div>
-    <h3>game creator: <span id="game-creator">none selected</span></h3>
-    <label>game key:</label>
-    <input type='text' name='game_key'><br>
-    <input type='submit' disabled='true' id='join-game-submit'>
-  </form>
-<% end %>
+<form>
+  <div style='display:none;'>
+    <input type='text' name='user_id' value='<%= @user_id  %>'>
+    <input type='text' name='game_id_selected' id='hidden-game-id'>
+  </div>
+  <h3>game creator: <span id="game-creator">none selected</span></h3>
+  <label>game key:</label>
+  <input type='text' name='game_key'><br>
+  <input type='submit' disabled='true' id='join-game-submit'>
+</form>
+
 
 
 <script type="text/javascript">

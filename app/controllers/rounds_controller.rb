@@ -2,17 +2,7 @@ class RoundsController < ApplicationController
   before_action :set_instance_variables_from_route, except: [:new]
 
   def new
-    @game = Game.find(params[:game_id])
-    @player = Player.find(params[:player_id])
 
-    if judge?
-      @round = @game.rounds.create(round_number: @game.round_number, judge_id: @game.judge_id)
-      @player.judge = true
-      @player.save
-      render :waiting_for_players
-    else
-      render :waiting_for_players
-    end
   end
 
   def draw_card
