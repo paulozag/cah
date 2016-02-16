@@ -30,9 +30,18 @@ class GamesController < ApplicationController
   def waiting_for_game_to_start
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
-    @round = Round.find(params[:round_id])
+    @round = @game.rounds.last
+    data = {status: 'good', html: (render_to_string 'waiting_for_game_to_start')}
+    p '^&^'*60
+    p "request type #{request.format}"
 
+    respond_to do |format|
+      format.json {render json: data}
+      format.html {render :waiting_for_game_to_start}
+    end
   end
+
+
 
   private
   def game_params
