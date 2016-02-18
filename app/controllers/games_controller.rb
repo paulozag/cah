@@ -6,7 +6,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
-    @game.judge_id = current_user.id
+    @game.creator_id = current_user.id
 
     respond_to do |format|
       if @game.save
@@ -32,8 +32,8 @@ class GamesController < ApplicationController
     @player = Player.find(params[:player_id])
     @round = @game.rounds.last
     data = {status: 'good', html: (render_to_string partial: 'waiting_for_players')}
-    p '^&^'*60
-    p "request type #{request.format}"
+    # p '^&^'*60
+    # p "request type #{request.format}"
 
     respond_to do |format|
       format.json {render json: data}
