@@ -31,7 +31,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
     @round = @game.rounds.last
-    data = {status: 'good', html: (render_to_string 'waiting_for_game_to_start')}
+    data = {status: 'good', html: (render_to_string partial: 'waiting_for_players')}
     p '^&^'*60
     p "request type #{request.format}"
 
