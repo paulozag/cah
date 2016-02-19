@@ -32,7 +32,7 @@ class GamesController < ApplicationController
     @player = Player.find(params[:player_id])
     @round = @game.rounds.last
 
-    status = @game.players.count > 2 ? 'continue' : 'wait'
+    status = @game.status == 'playing' ? 'continue' : 'wait'
     new_path = game_player_round_draw_card_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
 
     data = {status: status, html: (render_to_string partial: 'waiting_for_players'), new_path: new_path}

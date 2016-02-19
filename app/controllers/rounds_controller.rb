@@ -17,6 +17,11 @@ class RoundsController < ApplicationController
     @player = Player.find(params[:player_id])
     @round = @game.rounds.last
 
+    if @game.status == 'loading'
+      @game.status = 'playing'
+      @game.save
+    end
+
     data = {html: (render_to_string 'draw_card')}
 
     respond_to do |format|
