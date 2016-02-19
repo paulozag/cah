@@ -1,4 +1,5 @@
 class QuestionCard < ActiveRecord::Base
+  belongs_to :game
   belongs_to :question_deck
   belongs_to :player, class_name: :winner
   belongs_to :master_question
