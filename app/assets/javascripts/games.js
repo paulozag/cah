@@ -15,7 +15,8 @@
         if (data.status == 'wait'){
           console.log('status: ' + data['status'])
           $('#main-content').html(data['html']);
-          setTimeout(pollNewPlayers, 2000);
+          serverPoller = setTimeout(pollNewPlayers, 2000);
+
         }
         if (data.status == 'continue') {
           console.log('in continue')
@@ -41,10 +42,18 @@
 
 
   var startGame = function(){
-    console.log('')
-    $.get("<%= game_player_round_draw_card_path(game_id: @game.id, player_id: @player.id, round_id: @round.id) %>"), function(data){
-      $('#main-content').html(data)
-    };
+    console.log('in start game')
+    clearTimeout(serverPoller);
+    var path = $('#new-path').html();
+    $.ajax({
+      type: 'get',
+      dataType: 'json',
+      url: path,
+      success: function(data){
+        console.log('in continue success function')
+        $('body').html(data.html)
+      }
+    });
   };
 
 
