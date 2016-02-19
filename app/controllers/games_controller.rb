@@ -31,7 +31,11 @@ class GamesController < ApplicationController
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
     @round = @game.rounds.last
-    data = {status: 'good', html: (render_to_string partial: 'waiting_for_players')}
+
+    status = @game.players.count > 2 ? 'continue' : 'wait'
+    new_path = game_player_round_draw_card_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+
+    data = {status: status, html: (render_to_string partial: 'waiting_for_players'), new_path: new_path}
     # p '^&^'*60
     # p "request type #{request.format}"
 
@@ -40,6 +44,8 @@ class GamesController < ApplicationController
       format.html {render :waiting_for_game_to_start}
     end
   end
+
+
 
 
 

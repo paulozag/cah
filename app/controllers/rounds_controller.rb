@@ -13,7 +13,15 @@ class RoundsController < ApplicationController
     # player
     #   status pending until question is picked
     #   render display_question
+    @game = Game.find(params[:game_id])
+    @player = Player.find(params[:player_id])
+    @round = @game.rounds.last
 
+    data = {html: (render_to_string 'draw_card')}
+
+    respond_to do |format|
+      format.json {render json: data}
+    end
   end
 
   def  question_displayed

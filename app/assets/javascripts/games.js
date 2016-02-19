@@ -12,12 +12,30 @@
       url: path,
       success: function(data){
         console.log('success');
-        console.log('status: ' + data['status'])
-        $('#main-content').html(data['html']);
-        setTimeout(pollNewPlayers, 2000);
+        if (data.status == 'wait'){
+          console.log('status: ' + data['status'])
+          $('#main-content').html(data['html']);
+          setTimeout(pollNewPlayers, 2000);
+        }
+        if (data.status == 'continue') {
+          console.log('in continue')
+          $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: data.new_path,
+            success: function(data){
+              console.log('in continue success function')
+              $('body').html(data.html)
+            }
+          });
+
+        }
+
       }
     })
   };
+
+
 
 
 
