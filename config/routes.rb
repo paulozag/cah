@@ -6,6 +6,21 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  resources :games, only: [:new, :create, :index] do
+    get :waiting_for_game_to_start
+
+    resources :players, only: [:new] do
+      resources :rounds, only: [:new] do
+        get 'draw_card'
+        get 'question_displayed'
+        get 'select_winner'
+        get 'summary'
+      end
+    end
+  end
+
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

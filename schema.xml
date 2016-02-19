@@ -37,7 +37,7 @@
     <type label="SET" length="1" sql="SET" quote=""/>
     <type label="Bit" length="0" sql="bit" quote=""/>
   </group>
-</datatypes><table x="708" y="35" name="Question Cards">
+</datatypes><table x="804" y="50" name="Question Cards">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -64,7 +64,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="649" y="422" name="Answer Cards">
+<table x="945" y="360" name="Answer Cards">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -91,7 +91,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="288" y="445" name="Players">
+<table x="182" y="103" name="Players">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -103,19 +103,14 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Users" row="id" />
 </row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="738" y="259" name="Games">
-<row name="id" null="1" autoincrement="1">
+<row name="judge?" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="20" y="148" name="Rounds">
+<table x="353" y="631" name="Rounds">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -124,8 +119,7 @@
 <default>NULL</default></row>
 <row name="game_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Games" row="id" />
-</row>
+<default>NULL</default></row>
 <row name="round_number" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -149,7 +143,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="199" y="53" name="Question Decks">
+<table x="601" y="255" name="Question Decks">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -161,7 +155,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="209" y="144" name="Answer Decks">
+<table x="890" y="631" name="Answer Decks">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -173,7 +167,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="985" y="187" name="Question Discard Piles">
+<table x="825" y="258" name="Question Discard Piles">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -185,7 +179,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1002" y="312" name="Answer Discard Piles">
+<table x="1142" y="597" name="Answer Discard Piles">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -197,7 +191,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="27" y="363" name="Users">
+<table x="140" y="436" name="Users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -214,7 +208,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1041" y="467" name="Master Answers">
+<table x="1185" y="383" name="Master Answers">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -225,7 +219,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="953" y="45" name="Master Questions">
+<table x="1031" y="101" name="Master Questions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -233,6 +227,34 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="num_responses" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="646" y="481" name="Games">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="new field" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="winner_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Players" row="id" />
+</row>
+<row name="game_key" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="creator_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Users" row="id" />
+</row>
+<row name="player_array" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="new field" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">

@@ -1,0 +1,10 @@
+<div id="main-content">
+  <%= render 'waiting_for_players'  %>
+</div>
+
+<script type="text/javascript">
+  var path = '<%=  game_waiting_for_game_to_start_path(game_id: @game.id, player_id: @player.id) %>'
+  setTimeout(pollNewPlayers(path), 2000);
+</script>
+
+

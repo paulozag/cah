@@ -1,0 +1,12 @@
+<h1>new game page</h1>
+<%= form_for @game do |f| %>
+  <%= f.label :game_key  %>
+  <%= f.text_field :game_key %>
+  <br><br>
+  <div style="display: none;">
+    <%= f.label :creator_id  %>
+    <%= f.number_field :creator_id  %>
+  </div>
+  <%= f.submit  %>
+
+<% end %>

@@ -6,8 +6,9 @@ class CreateRounds < ActiveRecord::Migration
       t.integer :round_number
       t.integer :judge_id
       t.integer :winner_id
-      t.references :question_card
-      t.references :answer_card
+      t.references :question_card, default: nil
+      t.references :answer_card, default: nil
+
       t.text :player_answers, hash: true, defalut: {}
 
       t.timestamps null: false

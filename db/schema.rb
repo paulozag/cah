@@ -39,9 +39,15 @@ ActiveRecord::Schema.define(version: 20160121032053) do
   end
 
   create_table "games", force: :cascade do |t|
+    t.string   "status",       default: "loading"
+    t.integer  "round_number", default: 1
     t.integer  "winner_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "judge_id"
+    t.string   "game_key"
+    t.integer  "creator_id"
+    t.text     "player_array", default: [],                     array: true
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   create_table "master_answers", force: :cascade do |t|
@@ -60,8 +66,10 @@ ActiveRecord::Schema.define(version: 20160121032053) do
   create_table "players", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "handle"
+    t.boolean  "judge",      default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "question_cards", force: :cascade do |t|
@@ -93,6 +101,7 @@ ActiveRecord::Schema.define(version: 20160121032053) do
     t.integer  "judge_id"
     t.integer  "winner_id"
     t.integer  "question_card_id"
+    t.integer  "answer_card_id"
     t.text     "player_answers"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false

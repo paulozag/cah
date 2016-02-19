@@ -1,0 +1,31 @@
+<h1>waiting for more players</h1>
+<!-- display list of players (list will update during polling) -->
+<!-- if player: start polling -->
+<!-- if judge: have a start game button disabled until 3 players or more -->
+
+<div class="box">
+  <h2>Members</h2>
+  <% @game.players.each do |player| %>
+    <p>
+      <span>
+        <%= player.handle  %>
+        <% if player.user_id == @game.creator_id %>
+          &nbsp;&nbsp;&nbsp; -- Game Creator --
+        <% end %>
+      </span>
+
+    </p>
+  <% end %>
+</div>
+<br>
+<br>
+<% if @player.user_id == @game.creator_id %>
+  <button onclick='startGame()'>start game</button>
+<% end %>
+
+<div style='display:none;' id='new-path'>
+  <%= game_player_round_draw_card_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)  %>
+</div>
+
+
+
