@@ -1,1 +1,10 @@
 <h1>draw card</h1>
+<div style="display: none;" id="path">
+  <%= @path  %>
+</div>
+
+<% if @judge %>
+  <button onclick="pickQuestion()">pick a question</button>
+<% else %>
+  wait for question to be picked
+<% end %>

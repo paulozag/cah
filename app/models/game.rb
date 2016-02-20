@@ -22,7 +22,7 @@ class Game < ActiveRecord::Base
     card
   end
 
-  def draw_qustion_card
+  def draw_question_card
     card = self.question_deck.question_cards.order("RANDOM()").first
     card.question_deck_id = nil
     card.save

@@ -37,11 +37,6 @@
     })
   };
 
-
-
-
-
-
   var startGame = function(){
     console.log('in start game')
     clearTimeout(serverPoller);
@@ -56,5 +51,21 @@
       }
     });
   };
+
+  var pickQuestion = function(){
+    console.log('in pick question')
+    var path = $('#path').html()
+    $.ajax({
+      type: 'get',
+      dataType: 'json',
+      url: path,
+      success: function(data){
+
+      }
+
+
+    })
+
+  }
 
 

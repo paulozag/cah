@@ -13,9 +13,9 @@ class RoundsController < ApplicationController
     # player
     #   status pending until question is picked
     #   render display_question
-    @game = Game.find(params[:game_id])
-    @player = Player.find(params[:player_id])
-    @round = @game.rounds.last
+
+    @judge = judge?
+    @path = game_player_round_question_displayed_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
 
     if @game.status == 'loading'
       @game.status = 'playing'
@@ -39,6 +39,15 @@ class RoundsController < ApplicationController
     # player
     #   receives player submission and updates round values
     #   render waiting_for_winner_page
+    unless @round.question_card_id
+      @round.question_card_id = (@game.draw_question_card).id
+      @round.save
+    end
+    data = {status: 'good'}
+    respond_to do |format|
+      format.json {render json: data}
+    end
+
   end
 
   def select_winner
@@ -72,12 +81,11 @@ class RoundsController < ApplicationController
   def set_instance_variables_from_route
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
-    round_id = params[:round_id] || params[:id]
-    @round = Round.find(@game.round_number)
+    @round = @game.rounds.last
   end
 
   def judge?
-    @player.user_id ==  @game.judge_id
+    @player.id ==  @round.judge_id
 
   end
 end
