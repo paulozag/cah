@@ -23,7 +23,7 @@ class RoundsController < ApplicationController
       @game.start_game
     end
 
-    data = {html: (render_to_string 'draw_card')}
+    data = {html: (render_to_string  'draw_card')}
 
     respond_to do |format|
       format.json {render json: data}

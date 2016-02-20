@@ -2,6 +2,7 @@
 
   var pollServer = function(path){
     console.log('in poll new players');
+    clearTimeout(serverPoller);
 
     $.ajax({
       type: 'get',
@@ -11,7 +12,7 @@
         console.log('success');
         if (data.status == 'wait'){
           console.log('status: ' + data['status'])
-          $('#main-content').html(data.html);
+          $('body').html(data.html);
           serverPoller = setTimeout(function(){pollServer(path)}, 2000);
 
         }
@@ -23,7 +24,7 @@
             url: data.new_path,
             success: function(data){
               console.log('in continue success function')
-              $('#main-content').html(data.html);
+              $('body').html(data.html);
               if (data.continue_polling){
                 pollServer(data.path)
               }
