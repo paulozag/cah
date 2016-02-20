@@ -5,17 +5,14 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params)
+    @game = Game.create(game_params)
+    @player = @game.players.create(user_id: current_user.id)
+    @round = @game.rounds.create(round_number: @game.round_number, judge_id: @player.id)
+    @game.judge_id = @player.id
     @game.creator_id = current_user.id
-
+    @game.save
     respond_to do |format|
-      if @game.save
-        @round = @game.rounds.create(round_number: @game.round_number, judge_id: @game.judge_id)
-        @player = @game.players.create(user_id: current_user.id)
-        format.html { redirect_to game_waiting_for_game_to_start_path(@game, player_id: @player.id, round_id: @round.id ) }
-      else
-        format.html {render 'new'}
-      end
+      format.html { redirect_to game_waiting_for_game_to_start_path(@game, player_id: @player.id, round_id: @round.id ) }
     end
   end
 

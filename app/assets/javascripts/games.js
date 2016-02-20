@@ -1,10 +1,7 @@
 
 
-  var pollNewPlayers = function(path){
+  var pollServer = function(path){
     console.log('in poll new players');
-    // $.get("<%= game_waiting_for_game_to_start_path(game_id: @game.id, player_id: @player.id) %>"), function(data){
-    //   console.log('in get function')
-    // };
 
     $.ajax({
       type: 'get',
@@ -14,8 +11,8 @@
         console.log('success');
         if (data.status == 'wait'){
           console.log('status: ' + data['status'])
-          $('#main-content').html(data['html']);
-          serverPoller = setTimeout(pollNewPlayers, 2000);
+          $('#main-content').html(data.html);
+          serverPoller = setTimeout(function(){pollServer(path)}, 2000);
 
         }
         if (data.status == 'continue') {
@@ -26,7 +23,10 @@
             url: data.new_path,
             success: function(data){
               console.log('in continue success function')
-              $('body').html(data.html)
+              $('#main-content').html(data.html);
+              if (data.continue_polling){
+                pollServer(data.path)
+              }
             }
           });
 
