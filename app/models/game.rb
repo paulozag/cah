@@ -9,11 +9,35 @@ class Game < ActiveRecord::Base
   has_one :question_discard_pile
 
   after_create :intitialize_game_objects
-
   scope :ready_for_players, -> { where(status: :loading)}
 
+  def draw_answer_card
+
+    card = self.answer_deck.answer_cards.order("RANDOM()").first
+    card.answer_deck_id = nil
+    card.save
+    if self.answer_deck.answer_cards.count == 0
+      restock_answer_deck
+    end
+    card
+  end
+
+  def draw_qustion_card
+    card = self.question_deck.question_cards.order("RANDOM()").first
+    card.question_deck_id = nil
+    card.save
+    if self.question_deck.question_cards.count == 0
+      restock_question_deck
+    end
+    card
+  end
+
+  def start_game
+    deal_starting_answer_cards
+  end
 
 
+  private
   def intitialize_game_objects
     question_deck = QuestionDeck.create(game_id: self.id)
     answer_deck = AnswerDeck.create(game_id: self.id)
@@ -33,6 +57,21 @@ class Game < ActiveRecord::Base
       card.answer_deck_id = answer_deck.id
       card.save
     end
+  end
 
+  def restock_answer_deck
+  end
+
+  def restock_question_deck
+  end
+
+  def deal_starting_answer_cards
+    self.players.each do |player|
+      10.times do
+        card = self.draw_answer_card
+        card.player_id = player.id
+        card.save
+      end
+    end
   end
 end

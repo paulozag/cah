@@ -20,6 +20,7 @@ class RoundsController < ApplicationController
     if @game.status == 'loading'
       @game.status = 'playing'
       @game.save
+      @game.start_game
     end
 
     data = {html: (render_to_string 'draw_card')}
