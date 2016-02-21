@@ -1,0 +1,7 @@
+.hidden {
+  display: none;
+}
+
+.hover-highlight:hover {
+  border: 2px solid black;
+}

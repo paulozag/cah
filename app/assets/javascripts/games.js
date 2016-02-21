@@ -62,8 +62,32 @@
 
     //   }
     // })
+  };
 
+  var selectAnswer = function(answerID){
+    console.log('in select answer');
+    $('#hidden-submit-button').show();
+    $('#hidden-selection-id').html(answerID);
+    var answerText = $('#'+answerID).html()
+    $('#selected-response').html(answerText)
+  };
 
+  var submitAnswer = function(){
+    var answerID = $('#hidden-selection-id');
+    submissionPath = $('#next-path').html();
+    $.ajax({
+      type: 'get',
+      dataType: 'json',
+      data: {answer_id: answerID},
+      url: submissionPath,
+      success: function(data){
+        console.log('in submit answer success')
+        $('body').html(data.html);
+        if (data.continue_polling){
+          pollServer(data.current_path)
+        }
+      }
+    });
   }
 
 
