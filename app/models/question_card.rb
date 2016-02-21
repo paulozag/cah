@@ -6,6 +6,7 @@ class QuestionCard < ActiveRecord::Base
   belongs_to :question_discard_pile
   has_one :round
 
-
-
+  def text
+    MasterQuestion.find(self.master_question_id).text
+  end
 end

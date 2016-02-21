@@ -13,17 +13,18 @@ class RoundsController < ApplicationController
     # player
     #   status pending until question is picked
     #   render display_question
-
-    @judge = judge?
-    @path = game_player_round_question_displayed_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
-
     if @game.status == 'loading'
       @game.status = 'playing'
       @game.save
       @game.start_game
     end
 
-    data = {html: (render_to_string  'draw_card')}
+    @judge = judge?
+    @current_path = game_player_round_draw_card_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+    @next_path = game_player_round_question_displayed_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+
+    status = @round.question_card_id ? 'continue' : 'wait'
+    data = {html: (render_to_string  'draw_card'), continue_polling: !judge?, next_path: @next_path, status: status}
 
     respond_to do |format|
       format.json {render json: data}
@@ -31,23 +32,22 @@ class RoundsController < ApplicationController
   end
 
   def  question_displayed
-    # expects: game, player, round instance variables
-    #
-    # judge
-    #   generates new question
-    #   renders waiting_for_all_answers_to_come_in
-    # player
-    #   receives player submission and updates round values
-    #   render waiting_for_winner_page
     unless @round.question_card_id
       @round.question_card_id = (@game.draw_question_card).id
       @round.save
     end
-    data = {status: 'good'}
+
+    @current_path = game_player_round_question_displayed_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+    @next_path = game_player_round_submit_answers_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+    @question = QuestionCard.find(@round.question_card_id)
+    data = {status: 'wait'}
     respond_to do |format|
       format.json {render json: data}
     end
 
+  end
+
+  def submit_answers
   end
 
   def select_winner

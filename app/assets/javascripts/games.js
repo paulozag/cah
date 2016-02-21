@@ -26,7 +26,7 @@
               console.log('in continue success function')
               $('body').html(data.html);
               if (data.continue_polling){
-                pollServer(data.path)
+                pollServer(data.next_path)
               }
             }
           });
@@ -54,17 +54,17 @@
 
   var pickQuestion = function(){
     console.log('in pick question')
-    var path = $('#path').html()
-    $.ajax({
-      type: 'get',
-      dataType: 'json',
-      url: path,
-      success: function(data){
+    var path = $('#next-path').html()
+    pollServer(path);
+    // $.ajax({
+    //   type: 'get',
+    //   dataType: 'json',
+    //   url: path,
+    //   success: function(data){
 
-      }
+    //   }
+    // })
 
-
-    })
 
   }
 
