@@ -73,7 +73,7 @@
   };
 
   var submitAnswer = function(){
-    var answerID = $('#hidden-selection-id');
+    var answerID = $('#hidden-selection-id').html();
     submissionPath = $('#next-path').html();
     $.ajax({
       type: 'get',

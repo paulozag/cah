@@ -53,6 +53,15 @@ class RoundsController < ApplicationController
   end
 
   def submit_answers
+    @current_path = game_player_round_submit_answers_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+    @next_path = game_player_round_select_winner_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+    register_player_answer params[:answer_id] if params[:answer_id]
+
+    data = {status: 'wait', html: (render_to_string  'submit_answers')}
+    respond_to do |format|
+      format.json {render json: data}
+    end
+
   end
 
   def select_winner
@@ -91,7 +100,15 @@ class RoundsController < ApplicationController
   end
 
   def judge?
-    @player.id ==  @round.judge_id
 
+    @player.id ==  @round.judge_id
   end
+
+  def register_player_answer(answer_id)
+    p 'POP' * 40
+    p "round number: #{@round.id}, player number: #{@player.id}"
+    @round.player_answers[@player.id] = answer_id
+    @round.save
+  end
+
 end
