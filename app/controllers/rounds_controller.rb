@@ -24,7 +24,10 @@ class RoundsController < ApplicationController
     @next_path = game_player_round_question_displayed_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
 
     status = @round.question_card_id ? 'continue' : 'wait'
-    data = {html: (render_to_string  'draw_card'), continue_polling: !judge?, next_path: @next_path, status: status}
+    p '%^%' * 300
+    p "status #{status}"
+    p "continue polling: #{!judge?}"
+    data = {html: (render_to_string  'draw_card'), continue_polling: !judge?, next_path: @next_path, status: status, current_path: @current_path}
 
     respond_to do |format|
       format.json {render json: data}
@@ -40,7 +43,9 @@ class RoundsController < ApplicationController
     @current_path = game_player_round_question_displayed_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
     @next_path = game_player_round_submit_answers_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
     @question = QuestionCard.find(@round.question_card_id)
-    data = {status: 'wait'}
+
+
+    data = {status: 'wait', html: (render_to_string  'display_question')}
     respond_to do |format|
       format.json {render json: data}
     end

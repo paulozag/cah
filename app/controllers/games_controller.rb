@@ -30,9 +30,9 @@ class GamesController < ApplicationController
     @round = @game.rounds.last
 
     status = @game.status == 'playing' ? 'continue' : 'wait'
-    new_path = game_player_round_draw_card_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+    next_path = game_player_round_draw_card_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
 
-    data = {status: status, html: (render_to_string 'waiting_for_game_to_start'), new_path: new_path}
+    data = {status: status, html: (render_to_string 'waiting_for_game_to_start'), next_path: next_path}
 
     respond_to do |format|
       format.json {render json: data}

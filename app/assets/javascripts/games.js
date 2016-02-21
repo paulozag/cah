@@ -1,7 +1,7 @@
 
 
   var pollServer = function(path){
-    console.log('in poll new players');
+    console.log('in pollServer path: ' + path);
     clearTimeout(serverPoller);
 
     $.ajax({
@@ -9,30 +9,28 @@
       dataType: 'json',
       url: path,
       success: function(data){
-        console.log('success');
+        console.log('success in initial ajax call for path: ' + path);
+        console.log('data packet: ' + data)
         if (data.status == 'wait'){
-          console.log('status: ' + data['status'])
+          console.log('im wait of initial ajax call: ' + data['status'])
           $('body').html(data.html);
           serverPoller = setTimeout(function(){pollServer(path)}, 2000);
-
         }
         if (data.status == 'continue') {
-          console.log('in continue')
+          console.log('in continue of initial ajax call, ')
           $.ajax({
             type: 'get',
             dataType: 'json',
-            url: data.new_path,
+            url: data.next_path,
             success: function(data){
               console.log('in continue success function')
               $('body').html(data.html);
               if (data.continue_polling){
-                pollServer(data.next_path)
+                pollServer(data.current_path)
               }
             }
           });
-
         }
-
       }
     })
   };
