@@ -57,7 +57,7 @@ class RoundsController < ApplicationController
     @next_path = game_player_round_select_winner_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
     register_player_answer params[:answer_id] if params[:answer_id]
 
-    data = {status: 'wait', html: (render_to_string  'submit_answers')}
+    data = {status: 'wait', html: (render_to_string  'submit_answers'), continue_polling: !judge?, current_path: @current_path, next_path: @next_path}
     respond_to do |format|
       format.json {render json: data}
     end

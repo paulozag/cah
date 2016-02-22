@@ -74,12 +74,12 @@
 
   var submitAnswer = function(){
     var answerID = $('#hidden-selection-id').html();
-    submissionPath = $('#next-path').html();
+    nextPath = $('#next-path').html();
     $.ajax({
       type: 'get',
+      url: nextPath,
       dataType: 'json',
       data: {answer_id: answerID},
-      url: submissionPath,
       success: function(data){
         console.log('in submit answer success')
         $('body').html(data.html);
