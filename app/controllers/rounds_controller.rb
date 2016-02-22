@@ -43,9 +43,10 @@ class RoundsController < ApplicationController
     @current_path = game_player_round_question_displayed_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
     @next_path = game_player_round_submit_answers_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
     @question = QuestionCard.find(@round.question_card_id)
+    status = @round.player_answers.count == @game.players.count - 1 ? 'continue' : 'wait'
 
 
-    data = {status: 'wait', html: (render_to_string  'display_question')}
+    data = {status: status, html: (render_to_string  'display_question'), current_path: @current_path, next_path: @next_path}
     respond_to do |format|
       format.json {render json: data}
     end
