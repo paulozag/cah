@@ -1,1 +1,9 @@
 <h1>answer submitted</h1>
+
+<% if @judge %>
+<% else %>
+  <% @round.player_answers.each do |player_id, answer_id| %>
+    <% answer = AnswerCard.find(answer_id) %>
+    <span><%= answer.text %></span><br>
+  <% end %>
+<% end %>

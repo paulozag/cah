@@ -46,11 +46,10 @@ class RoundsController < ApplicationController
     status = @round.player_answers.count == @game.players.count - 1 ? 'continue' : 'wait'
 
 
-    data = {status: status, html: (render_to_string  'display_question'), current_path: @current_path, next_path: @next_path}
+    data = {status: status, html: (render_to_string  'display_question'), current_path: @current_path, next_path: @next_path, continue_polling: judge?}
     respond_to do |format|
       format.json {render json: data}
     end
-
   end
 
   def submit_answers
@@ -106,8 +105,6 @@ class RoundsController < ApplicationController
   end
 
   def register_player_answer(answer_id)
-    p 'POP' * 40
-    p "round number: #{@round.id}, player number: #{@player.id}"
     @round.player_answers[@player.id] = answer_id
     @round.save
   end
