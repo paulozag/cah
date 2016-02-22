@@ -1,6 +1,19 @@
 <h1>answer submitted</h1>
 
+<div class="hidden">
+  <span id='current-path'><%= @current_path  %></span>
+  <span id='next-path'><%= @next_path  %></span>
+  <span id='hidden-selection-id'></span>
+</div>
+
 <% if @judge %>
+  <p>Winning submission: <span id='selected-response'>None Selected</span></p>
+  <% @round.player_answers.each do |player_id, answer_id| %>
+    <% answer_card = AnswerCard.find(answer_id) %>
+    <span id='<%= answer_card.id  %>' class="hover-highlight" onclick="selectAnswer(<%= answer_card.id  %>)"><%= answer_card.text  %></span><br>
+  <% end %>
+  <br><br>
+  <button id='hidden-submit-button' class='hidden' onclick='submitAnswer()'>submit answer</button>
 <% else %>
   <% @round.player_answers.each do |player_id, answer_id| %>
     <% answer = AnswerCard.find(answer_id) %>
