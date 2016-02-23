@@ -54,39 +54,29 @@ class RoundsController < ApplicationController
 
   def submit_answers
     @current_path = game_player_round_submit_answers_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
-    @next_path = game_player_round_select_winner_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+    @next_path = game_player_round_summary_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
     register_player_answer params[:answer_id] if params[:answer_id]
+    status = @round.answer_card_id ? 'continue' : 'wait'
 
-    data = {status: 'wait', html: (render_to_string  'submit_answers'), continue_polling: !judge?, current_path: @current_path, next_path: @next_path}
+    data = {status: status, html: (render_to_string  'submit_answers'), continue_polling: !judge?, current_path: @current_path, next_path: @next_path}
     respond_to do |format|
       format.json {render json: data}
     end
 
   end
 
-  def select_winner
-    # expects: game, player, round instance variables
-    #
-    # judge
-    #   status pending until all answers submitted
-    #   render choose_winner
-    #
-    # if player
-    # => status pending until winner is selected
-    # => render summary
-  end
+
 
   def summary
-    # expects: game, player, round instance variables
-    #
-    # judge
-    #   receive id of winning answer
-    #   update round, check game winning criteria,
-    #
-    #   create new round, assign next judge, increment game.round_number
-    #   render summary
-    # player
-    #   player never gets here - player is rendered summary directly from select_winner
+    finalize_round params[:answer_id] if params[:answer_id]
+
+
+
+    data = {status: 'wait', html: (render_to_string  'summary'), continue_polling: false, current_path: @current_path, next_path: @next_path}
+
+    respond_to do |format|
+      format.json {render json: data}
+    end
   end
 
 
@@ -107,6 +97,23 @@ class RoundsController < ApplicationController
   def register_player_answer(answer_id)
     @round.player_answers[@player.id] = answer_id
     @round.save
+  end
+
+  def finalize_round(answer_id)
+    @round.answer_card_id = answer_id
+    @round.save
+    move_played_answer_cards_to_discard_pile
+    move_question_card_to_winners_hand
+    create_next_round
+  end
+
+  def move_played_answer_cards_to_discard_pile
+  end
+
+  def move_question_card_to_winners_hand
+  end
+
+  def create_next_round
   end
 
 end
