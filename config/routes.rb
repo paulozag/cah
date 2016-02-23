@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :rounds, only: [:new] do
         get 'draw_card'
         get 'question_displayed'
-        get 'select_winner'
+        get 'submit_answers'
         get 'summary'
       end
     end

@@ -1,0 +1,21 @@
+<h1>display question</h1>
+
+<div class="hidden">
+  <span id='current-path'><%= @current_path  %></span>
+  <span id='next-path'><%= @next_path  %></span>
+  <span id='hidden-selection-id'></span>
+</div>
+
+<h2>Question: <%= @question.text  %></h2>
+<br><br>
+<% if @judge %>
+  waiting for all answers to be submitted
+<% else %>
+  <p>your response: <span id='selected-response'>None Selected</span></p>
+  <br>
+  <% @player.answer_cards.each do |answer_card| %>
+    <span id='<%= answer_card.id  %>' class="hover-highlight" onclick="selectAnswer(<%= answer_card.id  %>)"><%= answer_card.text  %></span><br>
+  <% end %>
+  <br><br>
+  <button id='hidden-submit-button' class='hidden' onclick='submitAnswer()'>submit answer</button>
+<% end %>
