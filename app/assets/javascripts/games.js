@@ -90,4 +90,9 @@
     });
   }
 
+  var proceedToNextRound = function(){
+    nextPath = $('#next-path').html();
+    pollServer(nextPath);
+  }
+
 

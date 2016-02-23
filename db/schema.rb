@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160121032053) do
   create_table "answer_cards", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "player_id"
+    t.integer  "round_id"
     t.integer  "answer_deck_id"
     t.integer  "answer_discard_pile_id"
     t.boolean  "excluded",               default: false
@@ -74,7 +75,7 @@ ActiveRecord::Schema.define(version: 20160121032053) do
   end
 
   create_table "question_cards", force: :cascade do |t|
-    t.integer  "winner_id"
+    t.integer  "player_id"
     t.integer  "game_id"
     t.integer  "question_deck_id"
     t.integer  "question_discard_pile_id"

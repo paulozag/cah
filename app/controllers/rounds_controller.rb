@@ -69,6 +69,9 @@ class RoundsController < ApplicationController
 
   def summary
     finalize_round params[:answer_id] if params[:answer_id]
+    # check winning conditions
+    @current_path = game_player_round_summary_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
+    @next_path = game_player_round_draw_card_path(game_id: @game.id, player_id: @player.id, round_id: @game.rounds.last.id)
 
 
 
@@ -85,7 +88,11 @@ class RoundsController < ApplicationController
   def set_instance_variables_from_route
     @game = Game.find(params[:game_id])
     @player = Player.find(params[:player_id])
-    @round = @game.rounds.last
+    if params[:round_id]
+      @round = Round.find(params[:round_id])
+    else
+      @round = Game.rounds.last
+    end
     @judge = judge?
   end
 
@@ -102,18 +109,38 @@ class RoundsController < ApplicationController
   def finalize_round(answer_id)
     @round.answer_card_id = answer_id
     @round.save
-    move_played_answer_cards_to_discard_pile
     move_question_card_to_winners_hand
+    move_played_answer_cards_to_discard_pile
     create_next_round
   end
 
   def move_played_answer_cards_to_discard_pile
+    @round.player_answers.each do |player_id, answer_card_id|
+      card = AnswerCard.find(answer_card_id)
+      card.player_id = nil
+      card.answer_discard_pile_id = @game.answer_discard_pile.id
+      card.save
+    end
   end
 
   def move_question_card_to_winners_hand
+    card = @round.question_card
+    winner = @round.answer_card.player
+    card.question_deck_id = nil
+    card.player_id = winner.id
+    card.save
   end
 
   def create_next_round
+    @game.round_number += 1
+    @game.save
+    @game.rounds.create(round_number: @game.round_number, judge_id: select_next_judge)
+  end
+
+  def select_next_judge
+    player_count = @game.players.count
+    judge_index = ((@game.round_number) -1) % player_count
+    @game.players[judge_index].id
   end
 
 end
