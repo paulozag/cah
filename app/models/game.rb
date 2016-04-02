@@ -43,6 +43,7 @@ class Game < ActiveRecord::Base
     answer_deck = AnswerDeck.create(game_id: self.id)
     question_discard_pile = QuestionDiscardPile.create(game_id: self.id)
     answer_discard_pile = AnswerDiscardPile.create(game_id: self.id)
+    point_limit ||= 10
 
     MasterQuestion.all.each do |mq|
       card = self.question_cards.create
