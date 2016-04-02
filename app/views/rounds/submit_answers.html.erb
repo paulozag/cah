@@ -13,7 +13,7 @@
     <span id='<%= answer_card.id  %>' class="hover-highlight" onclick="selectAnswer(<%= answer_card.id  %>)"><%= answer_card.text  %></span><br>
   <% end %>
   <br><br>
-  <button id='hidden-submit-button' class='hidden' onclick='submitAnswer()'>submit answer</button>
+  <button id='hidden-submit-button' style='display: none;' onclick='submitAnswer()'>submit answer</button>
 <% else %>
   <% @round.player_answers.each do |player_id, answer_id| %>
     <% answer = AnswerCard.find(answer_id) %>

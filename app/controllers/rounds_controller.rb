@@ -108,9 +108,11 @@ class RoundsController < ApplicationController
 
   def finalize_round(answer_id)
     @round.answer_card_id = answer_id
+    @round.winner_id = AnswerCard.find(answer_id).player.id
     @round.save
     move_question_card_to_winners_hand
     move_played_answer_cards_to_discard_pile
+    deal_new_answer_cards_to_players
     create_next_round
   end
 
@@ -125,9 +127,8 @@ class RoundsController < ApplicationController
 
   def move_question_card_to_winners_hand
     card = @round.question_card
-    winner = @round.answer_card.player
     card.question_deck_id = nil
-    card.player_id = winner.id
+    card.player_id = @round.winner_id
     card.save
   end
 
@@ -141,6 +142,16 @@ class RoundsController < ApplicationController
     player_count = @game.players.count
     judge_index = ((@game.round_number) -1) % player_count
     @game.players[judge_index].id
+  end
+
+  def deal_new_answer_cards_to_players
+    @game.players.each do |player|
+      (10 - player.answer_cards.count).times do
+        card = @game.draw_answer_card
+        card.player_id = player.id
+        card.save
+      end
+    end
   end
 
 end
