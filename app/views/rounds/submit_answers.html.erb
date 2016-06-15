@@ -7,6 +7,10 @@
 </div>
 
 <% if @judge %>
+  <style>body{
+    background-color: black;
+    color: white;}</style>
+  
   <p>Winning submission: <span id='selected-response'>None Selected</span></p>
   <% @round.player_answers.each do |player_id, answer_id| %>
     <% answer_card = AnswerCard.find(answer_id) %>
