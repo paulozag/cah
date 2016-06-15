@@ -9,7 +9,12 @@
 <h2>Question: <%= @question.text  %></h2>
 <br><br>
 <% if @judge %>
+  
+  <style>body{background-color: black;
+    color: white;}</style>
+  
   waiting for all answers to be submitted
+
 <% else %>
   <p>your response: <span id='selected-response'>None Selected</span></p>
   <br>

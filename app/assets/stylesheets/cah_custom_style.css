@@ -5,3 +5,22 @@
 .hover-highlight:hover {
   border: 2px solid black;
 }
+
+body {
+  /*border-left: 100%;
+  border-left-color: white;
+  border-right: 100%;
+  border-right-color: white;    
+  border-top: 100%;
+  border-top-color: white;
+  border-bottom: 100%;
+  border-bottom-color: white; 
+  background-color: black;
+  color: white;*/
+}
+
+.header {
+  text-align: center;
+}
+
+
