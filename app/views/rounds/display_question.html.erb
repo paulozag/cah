@@ -6,12 +6,15 @@
   <span id='hidden-selection-id'></span>
 </div>
 
+<div class='card'>
 <h2>Question: <%= @question.text  %></h2>
 <br><br>
 <% if @judge %>
   
   <style>body{background-color: black;
-    color: white;}</style>
+              color: white;}
+        .card {border: 2px solid white;}
+  </style>
   
   waiting for all answers to be submitted
 
@@ -24,3 +27,4 @@
   <br><br>
   <button id='hidden-submit-button' class='hidden' onclick='submitAnswer()'>submit answer</button>
 <% end %>
+</div>

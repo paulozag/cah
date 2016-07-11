@@ -82,7 +82,9 @@ class RoundsController < ApplicationController
     end
   end
 
+  def game_summary
 
+  end
   private
 
   def set_instance_variables_from_route
@@ -111,6 +113,9 @@ class RoundsController < ApplicationController
     @round.save
     move_question_card_to_winners_hand
     move_played_answer_cards_to_discard_pile
+    if game_won?
+      redirect_to games/game_summary
+    end
     create_next_round
   end
 
@@ -141,6 +146,20 @@ class RoundsController < ApplicationController
     player_count = @game.players.count
     judge_index = ((@game.round_number) -1) % player_count
     @game.players[judge_index].id
+  end
+
+  def game_won?
+    @game.players.each do |player|
+      player.question_cards.count
+
+      if player.question_cards.count >= 2
+        @game.winner_id = player.id
+        return true
+      end
+    end
+
+    false
+  
   end
 
 end
