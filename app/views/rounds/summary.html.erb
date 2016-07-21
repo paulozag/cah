@@ -1,4 +1,14 @@
-<h1>game summary</h1>
+<h1>Round <%= @round.round_number %> Summary</h1>
+<br>
+<p>Judge: <%= Player.find(@round.judge_id).handle %></p>
+<p>Question: <%= @round.question_card.text %></p>
+<p>Winning Answer: <%= @round.answer_card.text %></p>
+<p>Round Winner: <%= Player.find(@round.winner_id).handle %></p>
+<br><br>
+<h2>Game Scores</h2>
+<% @game.players.each do |player| %>
+  <p><%= player.handle %>&nbsp;&nbsp;&nbsp;&nbsp;<%= player.question_cards.count %></p>
+<% end %>
 
 <br><br>
 <button onclick="proceedToNextRound()">proceed to next round</button>
