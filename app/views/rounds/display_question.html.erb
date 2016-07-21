@@ -6,10 +6,18 @@
   <span id='hidden-selection-id'></span>
 </div>
 
+<div class='card'>
 <h2>Question: <%= @question.text  %></h2>
 <br><br>
 <% if @judge %>
+  
+  <style>body{background-color: black;
+              color: white;}
+        .card {border: 2px solid white;}
+  </style>
+  
   waiting for all answers to be submitted
+
 <% else %>
   <p>your response: <span id='selected-response'>None Selected</span></p>
   <br>
@@ -17,5 +25,6 @@
     <span id='<%= answer_card.id  %>' class="hover-highlight" onclick="selectAnswer(<%= answer_card.id  %>)"><%= answer_card.text  %></span><br>
   <% end %>
   <br><br>
-  <button id='hidden-submit-button' class='hidden' onclick='submitAnswer()'>submit answer</button>
+  <button id='hidden-submit-button' style='display: none;' onclick='submitAnswer()'>submit answer</button>
 <% end %>
+</div>

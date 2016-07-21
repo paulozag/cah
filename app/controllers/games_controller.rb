@@ -18,10 +18,16 @@ class GamesController < ApplicationController
 
   def index
     @user_id = params[:user_id]
-    if params[:game_id_selected]
-      redirect_to new_game_player_path(game_id: params[:game_id_selected], user_id: params[:user_id])
-    end
     @games = Game.all.ready_for_players
+    if params[:game_id_selected]
+      @game = Game.find(params[:game_id_selected])
+      if @game.game_key == params[:game_key]
+        redirect_to new_game_player_path(game_id: params[:game_id_selected], user_id: params[:user_id])
+      else
+        render 'index'
+      end
+    end
+
   end
 
   def waiting_for_game_to_start
@@ -46,7 +52,7 @@ class GamesController < ApplicationController
 
   private
   def game_params
-    params.require(:game).permit(:game_key, :creator_id)
+    params.require(:game).permit(:game_key, :creator_id, :point_limit)
   end
 
 

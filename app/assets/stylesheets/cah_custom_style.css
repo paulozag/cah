@@ -5,3 +5,13 @@
 .hover-highlight:hover {
   border: 2px solid black;
 }
+
+.card {
+  border: 2px solid black;
+}
+
+.header {
+  text-align: center;
+}
+
+
