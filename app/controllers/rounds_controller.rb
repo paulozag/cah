@@ -62,19 +62,13 @@ class RoundsController < ApplicationController
     respond_to do |format|
       format.json {render json: data}
     end
-
   end
-
-
 
   def summary
     finalize_round params[:answer_id] if params[:answer_id]
     # check winning conditions
     @current_path = game_player_round_summary_path(game_id: @game.id, player_id: @player.id, round_id: @round.id)
     @next_path = game_player_round_draw_card_path(game_id: @game.id, player_id: @player.id, round_id: @game.rounds.last.id)
-
-
-
     data = {status: 'wait', html: (render_to_string  'summary'), continue_polling: false, current_path: @current_path, next_path: @next_path}
 
     respond_to do |format|
@@ -82,7 +76,9 @@ class RoundsController < ApplicationController
     end
   end
 
+  def game_summary
 
+  end
   private
 
   def set_instance_variables_from_route
@@ -112,6 +108,10 @@ class RoundsController < ApplicationController
     @round.save
     move_question_card_to_winners_hand
     move_played_answer_cards_to_discard_pile
+
+    if game_won?
+      redirect_to games/game_summary
+    end
     deal_new_answer_cards_to_players
     create_next_round
   end
@@ -143,6 +143,19 @@ class RoundsController < ApplicationController
     judge_index = ((@game.round_number) -1) % player_count
     @game.players[judge_index].id
   end
+
+  def game_won?
+    @game.players.each do |player|
+      player.question_cards.count
+
+      if player.question_cards.count >= 2
+        @game.winner_id = player.id
+        return true
+      end
+    end
+    false
+  end
+
 
   def deal_new_answer_cards_to_players
     @game.players.each do |player|
